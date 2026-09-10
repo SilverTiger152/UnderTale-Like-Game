@@ -1,0 +1,60 @@
+{
+    "patterns": [
+        {
+            "status": "normal",
+            "id": "NPatternOne",
+            "boxSize": [10, 10],
+            "boxPosition": [0, 0],
+            "bullets": ["Circle"],
+            "duration": 7
+        },
+        {
+            "status": "normal",
+            "id": "NPatternTwo",
+            "boxSize": [3, 3],
+            "boxPosition": [0, 0],
+            "bullets": ["Circle"],
+            "duration": 7
+        },
+       {
+            "status": "normal",
+            "id": "NPatternThree",
+            "boxSize": [13, 9],
+            "boxPosition": [0, 0],
+            "bullets": ["Circle", "Square"],
+            "duration": 11
+       },
+       {
+            "status": "normal",
+            "id": "NPatternFour",
+            "boxSize": [3, 3],
+            "boxPosition": [0, 0],
+            "bullets": ["Square"],
+            "duration": 12
+       },
+       {
+            "status": "normal",
+            "id": "NPatternFive",
+            "boxSize": [5, 5],
+            "boxPosition": [0, 0],
+            "bullets": ["LinearFunction"],
+            "duration": 12
+       },
+       {
+            "status": "normal",
+            "id": "NPatternSix",
+            "boxSize": [13, 3],
+            "boxPosition": [0, 0],
+            "bullets": ["Square","LinearFunction"],
+            "duration": 11
+       },
+       {
+            "status": "normal",
+            "id": "NPatternSevon",
+            "boxSize": [15, 6],
+            "boxPosition": [0, 0],
+            "bullets": ["Square","QuadraticFunction"],
+            "duration": 12
+       }
+    ]
+}

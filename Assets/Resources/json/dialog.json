@@ -1,0 +1,56 @@
+{
+  "dialogs": [
+    {
+      "dialog": [
+        "안녕 난 국어책이야"
+      ],
+      "interval": 1,
+      "playSound": true
+    },
+    {
+      "dialog": [
+        "원은 정말 동글동글해서 이뻐ㅎㅎ"
+      ],
+      "interval": 1,
+      "playSound": true
+    },
+    {
+      "dialog": [
+        "닮은 도형은 각각의 대응변의 길이의 비가 같아",
+        "근데 이걸 모르는 사람이 있나?"
+      ],
+      "interval": 1,
+      "playSound": true
+    },
+    {
+      "dialog": [
+	"정보) 이 공격에 나오는 사각형 다 닮아있음ㅋㅋ"
+      ],
+      "interval": 1,
+      "playSound": true
+    },
+    {
+      "dialog": [
+	"너, 일차함수에 대해 들어보았나?",
+	"안 들어봤을리가 없지ㅎㅎ"
+      ],
+      "interval": 1,
+      "playSound": true
+    },
+    {
+      "dialog": [
+	"이번껀 좀 어려울껄?ㅋㅋ"
+      ],
+      "interval": 1,
+      "playSound": true
+    },
+    {
+      "dialog": [
+	"아, 이차함수",
+	"정겹고도 그리운 이름이여"
+      ],
+      "interval": 1,
+      "playSound": true
+    }
+  ]
+}
