@@ -21,6 +21,10 @@ public class BulletSettings
 
     public float reverseTime;
     public float mirrorDuration;
+
+    public float detectionRadius;
+    public string textContent;
+
     public void setCircleSettings(Vector3 ol, Vector3 tl, float s, float r)
     {
         OriginalLocation = ol;
@@ -67,6 +71,16 @@ public class BulletSettings
     {
         this.reverseTime = rt;
         this.mirrorDuration = md;
+    }
+
+    public void setVanishSettings(Vector3 ol, Vector3 tl, float s, float r, float dr, string text)
+    {
+        OriginalLocation = ol;
+        TargetLocation = tl;
+        speed = s; 
+        radious = r;
+        detectionRadius = dr;
+        textContent = text;
     }
 
     private float getInterval(float radious, float speed)

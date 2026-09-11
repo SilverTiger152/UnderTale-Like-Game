@@ -11,6 +11,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] public GameObject LinearFunctionPrefab;
     [SerializeField] public GameObject QuadraticFunctionPrefab;
     [SerializeField] public GameObject mirrorGimmikPrefab; // 미러 기믹 프리팹 등록용
+    [SerializeField] public GameObject vanishBulletPrefab;
 
     [SerializeField] private AudioClip warningSound; // 인스펙터에서 효과음 등록
     [SerializeField] private SoundManager soundManager;
@@ -104,5 +105,20 @@ public class BulletSpawner : MonoBehaviour
         SquareBullet SController = SBullet.GetComponent<SquareBullet>();
 
         SController.getData(squareBulletData);
+    }
+
+    // BulletSpawner.cs 상단에 변수 추가
+
+
+// 탄환 생성 메서드 추가
+// BulletSpawner.cs 상단 변수 선언부에 추가
+
+
+// 생성 메서드 추가
+    public void CopyVanish(VanishBulletData vanishData)
+    {
+        GameObject vBullet = Instantiate(vanishBulletPrefab, vanishData.originalLocation, Quaternion.identity);
+        VanishBullet vController = vBullet.GetComponent<VanishBullet>();
+        vController.getData(vanishData);
     }
 }

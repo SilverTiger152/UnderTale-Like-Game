@@ -13,7 +13,7 @@
             "id": "NPatternTwo",
             "boxSize": [3, 3],
             "boxPosition": [0, 0],
-            "bullets": ["Circle"],
+            "bullets": ["Vanish"],
             "duration": 7
         },
        {

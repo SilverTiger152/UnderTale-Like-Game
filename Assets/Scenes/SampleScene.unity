@@ -1733,6 +1733,7 @@ MonoBehaviour:
   LinearFunctionPrefab: {fileID: 1618125250495823791, guid: 2867ff4a9899b70438ae7afc1898bff0, type: 3}
   QuadraticFunctionPrefab: {fileID: 1618125250495823791, guid: 09faf1b8d8c230c4d9e702542b63c1fa, type: 3}
   mirrorGimmikPrefab: {fileID: 1684581209422060694, guid: 5c1a2ee3f4fcef64ca2cc2636129e061, type: 3}
+  vanishBulletPrefab: {fileID: 0}
   warningSound: {fileID: 8300000, guid: 2eeef2e73bfa9344ca08c9c3e0b05e2d, type: 3}
   soundManager: {fileID: 1843658813}
   blinkInterval: 0.1
