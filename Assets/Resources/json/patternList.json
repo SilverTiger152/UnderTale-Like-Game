@@ -5,7 +5,7 @@
             "id": "NPatternOne",
             "boxSize": [10, 10],
             "boxPosition": [0, 0],
-            "bullets": ["Circle"],
+            "bullets": ["Circle", "Mirror"],
             "duration": 7
         },
         {
@@ -21,7 +21,7 @@
             "id": "NPatternThree",
             "boxSize": [13, 9],
             "boxPosition": [0, 0],
-            "bullets": ["Circle", "Square"],
+            "bullets": ["Circle"],
             "duration": 11
        },
        {
@@ -29,7 +29,7 @@
             "id": "NPatternFour",
             "boxSize": [3, 3],
             "boxPosition": [0, 0],
-            "bullets": ["Square"],
+            "bullets": ["Circle"],
             "duration": 12
        },
        {
@@ -45,7 +45,7 @@
             "id": "NPatternSix",
             "boxSize": [13, 3],
             "boxPosition": [0, 0],
-            "bullets": ["Square","LinearFunction"],
+            "bullets": ["LinearFunction"],
             "duration": 11
        },
        {

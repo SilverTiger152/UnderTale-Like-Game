@@ -14,10 +14,13 @@ public class BulletSettings
 
     public float slope;
 
-    public float a;                // Æø (°î·ü)
-    public float p;                // ÃàÀÇ ¹æÁ¤½Ä (²ÀÁþÁ¡ x)
+    public float a;                // ï¿½ï¿½ (ï¿½ï¿½ï¿½)
+    public float p;                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ x)
     public float q;
     public float xDir;
+
+    public float reverseTime;
+    public float mirrorDuration;
     public void setCircleSettings(Vector3 ol, Vector3 tl, float s, float r)
     {
         OriginalLocation = ol;
@@ -60,6 +63,12 @@ public class BulletSettings
         interval = getInterval(radious, speed);
     }
 
+    public void setMirrorSettings(float rt, float md)
+    {
+        this.reverseTime = rt;
+        this.mirrorDuration = md;
+    }
+
     private float getInterval(float radious, float speed)
     {
         float diameter = radious * 2f;
@@ -67,7 +76,7 @@ public class BulletSettings
         float density = 0.03f;
         float calculatedInterval = (diameter * density) / speed;
 
-        // ÃÖ¼Ò °£°Ý Á¦ÇÑ (³Ê¹« ÀÛ¾ÆÁö¸é ·º °É¸± ¼ö ÀÖÀ½)
+        // ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ê¹ï¿½ ï¿½Û¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½É¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         calculatedInterval = Mathf.Max(calculatedInterval, 0.001f);
 
         return calculatedInterval;

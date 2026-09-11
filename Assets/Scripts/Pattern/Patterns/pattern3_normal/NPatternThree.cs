@@ -7,12 +7,10 @@ public class NPatternThree : MonoBehaviour, IPatternInfo
     public IEnumerator PatternExecute(float duration)
     {
         Coroutine shootCircleCoroutine = StartCoroutine(CircleBullet());
-        Coroutine shootSquareCoroutine = StartCoroutine(SquareBullet());
 
         yield return new WaitForSeconds(duration);
 
         StopCoroutine(shootCircleCoroutine);
-        StopCoroutine(shootSquareCoroutine);
         StopAllCoroutines();
         spawner.StopAllCoroutines();
 
@@ -53,29 +51,6 @@ public class NPatternThree : MonoBehaviour, IPatternInfo
             spawner.CopyCircle(newData);
 
             yield return new WaitForSeconds(0.1f);
-        }
-    }
-
-    private IEnumerator SquareBullet()
-    {
-        BulletSettings bulletSettings = new BulletSettings();
-
-        while (true)
-        {
-            float randomPX = Random.Range(-5f, 5f);
-            float randomPY = Random.Range(-3.5f, 3.5f);
-
-            Vector3 position = new Vector3(randomPX, randomPY, 0f);
-
-            bulletSettings.setSquareSettings(position, 2f, 3f, 3f, 3f);
-
-            SquareBulletData newData = new SquareBulletData();
-            newData.ApplyTo(bulletSettings);
-
-            StartCoroutine(spawner.CopySquare(newData));
-
-            yield return new WaitForSeconds(1f);
-
         }
     }
 }

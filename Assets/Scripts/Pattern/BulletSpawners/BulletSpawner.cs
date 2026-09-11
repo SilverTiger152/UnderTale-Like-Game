@@ -10,11 +10,13 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] public GameObject squarePrefab;
     [SerializeField] public GameObject LinearFunctionPrefab;
     [SerializeField] public GameObject QuadraticFunctionPrefab;
+    [SerializeField] public GameObject mirrorGimmikPrefab; // ë¯¸ëŸ¬ ê¸°ë¯¹ í”„ë¦¬íŒ¹ ë“±ë¡ìš©
 
-    [SerializeField] private AudioClip warningSound; // ÀÎ½ºÆåÅÍ¿¡¼­ È¿°úÀ½ µî·Ï
+    [SerializeField] private AudioClip warningSound; // ì¸ìŠ¤í™í„°ì—ì„œ íš¨ê³¼ìŒ ë“±ë¡
     [SerializeField] private SoundManager soundManager;
 
-    public float blinkInterval = 0.1f; // ±ôºıÀÌ´Â °£°İ
+    public float blinkInterval = 0.1f; // ê¹œë¹¡ì´ëŠ” ê°„ê²©
+
     public void CopyCircle(CircleBulletData circleBulletData)
     {
         GameObject CBullet = Instantiate(circlePrefab, circleBulletData.originalLocation, Quaternion.identity);
@@ -42,6 +44,14 @@ public class BulletSpawner : MonoBehaviour
         QFController.getData(quadraticFunctionData);
     }
 
+    // ë¯¸ëŸ¬ ê¸°ë¯¹ ìƒì„± ë° ë°ì´í„° ì „ë‹¬
+    public void CopyMirror(MirrorGimmikData mirrorGimmikData)
+    {
+        GameObject mirrorObj = Instantiate(mirrorGimmikPrefab);
+        MirrorGimmik mirrorController = mirrorObj.GetComponent<MirrorGimmik>();
+        mirrorController.StartMirrorEffect(mirrorGimmikData);
+    }
+
     public IEnumerator CopySquare(SquareBulletData squareBulletData)
     {
         GameObject lineObj = Instantiate(warningLinePrefab);
@@ -50,12 +60,12 @@ public class BulletSpawner : MonoBehaviour
         float hw = squareBulletData.width / 2f;
         float hh = squareBulletData.height / 2f;
 
-        Vector3 center = squareBulletData.originalLocation; // ¼ÒÈ¯µÉ À§Ä¡ Áß½É
+        Vector3 center = squareBulletData.originalLocation; // ì†Œí™˜ë  ìœ„ì¹˜ ì¤‘ì‹¬
 
-        // 2. Áß½ÉÁ¡(center)À» ±âÁØÀ¸·Î ³× ²ÀÁşÁ¡ °è»ê
+        // 2. ì¤‘ì‹¬ì (center)ì„ ê¸°ì¤€ìœ¼ë¡œ ë„¤ ê¼­ì§“ì  ê³„ì‚°
         lr.positionCount = 4;
         lr.loop = true;
-        lr.startWidth = 0.05f; // ¼± µÎ²²
+        lr.startWidth = 0.05f; // ì„  ë‘ê»˜
         lr.endWidth = 0.05f;
         lr.useWorldSpace = true;
 
@@ -66,7 +76,7 @@ public class BulletSpawner : MonoBehaviour
 
         float elapsed = 0f;
         bool isRed = true;
-        // 2. ±ôºıÀÌ¸é¼­ ¼Ò¸®³»±â ·çÇÁ
+        // 2. ê¹œë¹¡ì´ë©´ì„œ ì†Œë¦¬ë‚´ê¸° ë£¨í”„
         while (elapsed < squareBulletData.interval)
         {
             isRed = !isRed;

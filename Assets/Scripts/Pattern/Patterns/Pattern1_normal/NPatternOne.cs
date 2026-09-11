@@ -1,16 +1,20 @@
 using NUnit.Framework.Constraints;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//¿øÇü ÅºÈ¯¸¸
+//ï¿½ï¿½ï¿½ï¿½ ÅºÈ¯ï¿½ï¿½
 
 public class NPatternOne : MonoBehaviour, IPatternInfo
 {
-    [SerializeField] private BulletSpawner spawner;
+[SerializeField] private BulletSpawner spawner;
 
     public IEnumerator PatternExecute(float duration)
     {
+        // ë¯¸ëŸ¬ ê¸°ë¯¹ ë°œë™ (ì˜ˆ: íŒ¨í„´ ì‹œì‘ 1ì´ˆ ë’¤ ë°œë™, 3ì´ˆ ë™ì•ˆ ìœ ì§€)
+        SpawnMirrorGimmick(1.0f, 3.0f);
+
         Coroutine shootCircleCoroutine = StartCoroutine(CircleBullet());
 
         yield return new WaitForSeconds(duration);
@@ -25,19 +29,34 @@ public class NPatternOne : MonoBehaviour, IPatternInfo
             if (line.gameObject != null) Destroy(line.gameObject);
         }
 
-        // ¸ğµç ÃÑ¾Ë »èÁ¦
+        // ëª¨ë“  ì´ì•Œ ì‚­ì œ
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
             if (bullet != null) Destroy(bullet);
         }
     }
+
+    // ë¯¸ëŸ¬ ê¸°ë¯¹ ì„¸íŒ… ë° spawner ì „ë‹¬ ë©”ì„œë“œ
+    private void SpawnMirrorGimmick(float reverseTime, float duration)
+    {
+        // 1. ì„¤ì • ë³´ë”°ë¦¬ì— ë¯¸ëŸ¬ ê¸°ë¯¹ ë°ì´í„° ì„¸íŒ…[cite: 3]
+        BulletSettings mirrorSettings = new BulletSettings();
+        mirrorSettings.setMirrorSettings(reverseTime, duration);
+
+        // 2. MirrorGimmikData ìƒì„± ë° ë°ì´í„° ì ìš©[cite: 6]
+        MirrorGimmikData mirrorData = new MirrorGimmikData();
+        mirrorData.ApplyTo(mirrorSettings);
+
+        // 3. BulletSpawnerë¡œ ìƒì„± ì „ë‹¬[cite: 7]
+        spawner.CopyMirror(mirrorData);
+    }
     private IEnumerator CircleBullet()
     {
         int i = 0;
 
         float angle = 0f;
-        // º¸µû¸®´Â Àç»ç¿ëÇØµµ µÇÁö¸¸, µ¥ÀÌÅÍ »óÀÚ´Â ¸Å¹ø »õ·Î ¸¸µå´Â °Ô ¾ÈÀüÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú´ï¿½ ï¿½Å¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         BulletSettings bulletSettings = new BulletSettings();
 
         while (true)
@@ -45,14 +64,14 @@ public class NPatternOne : MonoBehaviour, IPatternInfo
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             Vector3 direction = rotation * Vector3.up;
 
-            // 1. º¸µû¸®¿¡ °ª Ã¤¿ì±â
+            // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½
             bulletSettings.setCircleSettings(new Vector3(0f, 0f, 0f), direction, 3f, 1f);
 
-            // 2. [¼öÁ¤] ÀÌ¹ø ÅºÈ¯¸¸À» À§ÇÑ Àü¿ë µ¥ÀÌÅÍ °´Ã¼ »ı¼º
+            // 2. [ï¿½ï¿½ï¿½ï¿½] ï¿½Ì¹ï¿½ ÅºÈ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
             CircleBulletData newData = new CircleBulletData();
             newData.ApplyTo(bulletSettings);
 
-            // 3. ¹è´Ş
+            // 3. ï¿½ï¿½ï¿½
             spawner.CopyCircle(newData);
 
             yield return new WaitForSeconds(0.05f);

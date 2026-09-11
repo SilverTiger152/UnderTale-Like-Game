@@ -10,7 +10,7 @@ public class PatternManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField]private int patternIndex = 0;
 
-    [SerializeField] public Dictionary<string, IPatternInfo> patternDictionary;
+    public Dictionary<string, IPatternInfo> patternDictionary;
 
     [SerializeField] private GameObject textBoxInside;
     [SerializeField] private GameObject textBoxOutline;
@@ -29,7 +29,7 @@ public class PatternManager : MonoBehaviour
         TextAsset textAsset = Resources.Load<TextAsset>("json/patternList");
         if (textAsset == null)
         {
-            Debug.LogError("patternList ÆÄÀÏ ¸øÃ£À½!");
+            Debug.LogError("patternList ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã£ï¿½ï¿½!");
             return;
         }
         string jsonData = textAsset.text;
@@ -37,29 +37,29 @@ public class PatternManager : MonoBehaviour
         patternListData = JsonUtility.FromJson<PatternListWrap>(textAsset.text);
         if (patternListData.patterns == null)
         {
-            Debug.LogError("ÆÐÅÏ µ¥ÀÌÅÍ ÆÄ½Ì ½ÇÆÐ!");
+            Debug.LogError("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½ï¿½!");
             return;
         }
 
-        // 1. ¹Ýµå½Ã ÃÊ±âÈ­¸¦ ¸ÕÀú ÇØ¾ß NullReferenceExceptionÀÌ ¾È ³³´Ï´Ù.
+        // 1. ï¿½Ýµï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ NullReferenceExceptionï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.
         patternDictionary = new Dictionary<string, IPatternInfo>();
 
-        // 2. ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÑ ¸ðµç ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿É´Ï´Ù.
+        // 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
         IPatternInfo[] patterns = GetComponentsInChildren<IPatternInfo>();
 
         foreach (var p in patterns)
         {
             string patternName = p.GetType().Name;
 
-            // 3. Áßº¹ µî·Ï ¹æÁö: ¶È°°Àº ÀÌ¸§ÀÇ ÆÐÅÏ Å¬·¡½º°¡ ¿©·¯ °³ ÀÖÀ» °æ¿ì
+            // 3. ï¿½ßºï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: ï¿½È°ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             if (!patternDictionary.ContainsKey(patternName))
             {
                 patternDictionary.Add(patternName, p);
-                Debug.Log($"ÆÐÅÏ µî·Ï ¼º°ø: {patternName}");
+                Debug.Log($"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: {patternName}");
             }
             else
             {
-                Debug.LogWarning($"Áßº¹µÈ ÆÐÅÏ Å¬·¡½º ¹ß°ß: {patternName}. ÇÏ³ª¸¸ µî·ÏµË´Ï´Ù.");
+                Debug.LogWarning($"ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½: {patternName}. ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ÏµË´Ï´ï¿½.");
             }
         }
     }
@@ -87,16 +87,16 @@ public class PatternManager : MonoBehaviour
 
         //DetermineBullets(bullets);
 
-        // patternID¶ó´Â ÀÌ¸§ÀÌ µñ¼Å³Ê¸®¿¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í, ÀÖÀ¸¸é target¿¡ ³Ö¾îÁÜ
+        // patternIDï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ targetï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½
         if (patternDictionary.TryGetValue(id, out IPatternInfo target))
         {
-            // ¼º°ø: ÆÐÅÏ ½ÇÇà
+            // ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             yield return StartCoroutine(target.PatternExecute(duration));
         }
         else
         {
-            // ½ÇÆÐ: JSON¿¡ ¿ÀÅ¸°¡ ÀÖ°Å³ª µî·ÏµÇÁö ¾ÊÀº ÆÐÅÏÀÓ
-            Debug.LogError($"ÆÐÅÏ {id}¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù!");
+            // ï¿½ï¿½ï¿½ï¿½: JSONï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ö°Å³ï¿½ ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            Debug.LogError($"ï¿½ï¿½ï¿½ï¿½ {id}ï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
         }
 
         // -----------------------------------------------------------------------------------
@@ -145,12 +145,12 @@ public class PatternManager : MonoBehaviour
     }
     //public void DetermineBullets(List<string> BulletList)
     //{
-    //    foreach (var raw in BulletList) // ¿©±â¼­ raw´Â ¹®ÀÚ¿­ typeÀ» °¡Áø °øÅë Å¬·¡½º
+    //    foreach (var raw in BulletList) // ï¿½ï¿½ï¿½â¼­ rawï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ typeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
     //    {
     //        MoveData dataInstance = raw switch
     //        {
-    //            "Circle" => new CircleBulletData { /* °ª º¹»ç */ },
-    //            //"Square" => new SquareBulletData { /* °ª º¹»ç */ },
+    //            "Circle" => new CircleBulletData { /* ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */ },
+    //            //"Square" => new SquareBulletData { /* ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */ },
     //            _ => null
     //        };
 
