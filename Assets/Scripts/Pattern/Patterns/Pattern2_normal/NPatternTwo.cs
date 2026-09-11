@@ -8,23 +8,25 @@ public class NPatternTwo : MonoBehaviour, IPatternInfo
 
     public IEnumerator PatternExecute(float duration)
     {
-        // 1. ¹è´Ï½Ã ÅºÈ¯ ¹ß»ç ÄÚ·çÆ¾ ½ÇÇà
+        Debug.Log($"[NPatternTwo] íŒ¨í„´ ì‹œì‘ (ì§€ì† ì‹œê°„: {duration}ì´ˆ)");
+        // 1. ë°œì‚¬ ë£¨í‹´ ì‹œì‘
         Coroutine bulletRoutine = StartCoroutine(VanishBulletRoutine());
 
-        // 2. ÆĞÅÏ À¯Áö ½Ã°£µ¿¾È ´ë±â
+        // 2. íŒ¨í„´ ì‹œê°„ ëŒ€ê¸°
         yield return new WaitForSeconds(duration);
 
-        // 3. ÆĞÅÏ Á¾·á ½Ã ÅºÈ¯ ¹ß»ç Áß´Ü
+        // 3. ë°œì‚¬ ì¤‘ì§€
+        Debug.Log("[NPatternTwo] íŒ¨í„´ ì¢…ë£Œ - íƒ„í™˜ ë°œì‚¬ ì¤‘ì§€ ë° ì •ë¦¬ ì‹œì‘");
         StopCoroutine(bulletRoutine);
 
-        // 4. ¸ğµç °æ°í¼± »èÁ¦
+        // 4. ê²½ê³ ì„  ì œê±°
         LineRenderer[] warningLines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
         foreach (LineRenderer line in warningLines)
         {
             if (line.gameObject != null) Destroy(line.gameObject);
         }
 
-        // 5. ¸ğµç ÃÑ¾Ë »èÁ¦
+        // 5. ì´ì•Œ ì¼ê´„ ì œê±°
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
@@ -34,34 +36,41 @@ public class NPatternTwo : MonoBehaviour, IPatternInfo
 
     private IEnumerator VanishBulletRoutine()
     {
+        Debug.Log("[NPatternTwo] VanishBullet ë°œì‚¬ ë£¨í‹´ ì‹œì‘ë¨");
+        
+        if (spawner == null) Debug.LogError("[NPatternTwo] Spawnerê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤! Inspectorë¥¼ í™•ì¸í•˜ì„¸ìš”.");
+        if (player == null) Debug.LogError("[NPatternTwo] Playerê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤! Inspectorë¥¼ í™•ì¸í•˜ì„¸ìš”.");
+
         BulletSettings bulletSettings = new BulletSettings();
 
         while (true)
         {
-            // ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ À§Ä¡ ¹× Á¶ÁØ ¹æÇâÀ» °è»êÇÏ´Â ±âÁ¸ ·ÎÁ÷ À¯Áö
+            // í”Œë ˆì´ì–´ ë°©í–¥ ê³„ì‚°
             Vector3 dir = player.transform.position - transform.position;
             dir.z = 0;
 
             Vector3 direction = dir.normalized;
             direction.y += 0.15f;
 
-            // ¿øÇü ÅºÈ¯ ´ë½Å ¹è´Ï½Ã ÅºÈ¯ Àü¿ë µ¥ÀÌÅÍ ¼¼ÆÃ
+            // íƒ„í™˜ ì„¸íŒ…
             bulletSettings.setVanishSettings(
-                new Vector3(5f, 0f, 0f), // ol: À§Ä¡
-                direction,               // tl: ¹æÇâ
-                8f,                      // s: ¼Óµµ
-                0.7f,                    // r: ÅºÈ¯ ±âº» Å©±â (´©¶ôµÇ¾ú´ø °ª)
-                1.5f,                    // dr: °¨Áö ¹üÀ§
-                "Vanish"                 // text: Ãâ·Â ÅØ½ºÆ®
+                new Vector3(5f, 0f, 0f), // ol:
+                direction,               // tl:
+                8f,                      // s:
+                0.7f,                    // r:
+                1.5f,                    // dr:
+                "Vanish"                 // text:
             );
 
             VanishBulletData newData = new VanishBulletData();
             newData.ApplyTo(bulletSettings);
 
-            // ¹è´Ï½Ã ÅºÈ¯ »ı¼º
-            spawner.CopyVanish(newData);
+            Debug.Log($"[NPatternTwo] VanishBullet ë°ì´í„° ì„¸íŒ… ì™„ë£Œ, Spawnerë¡œ ì „ë‹¬ (ë°©í–¥: {direction})");
 
-            yield return new WaitForSeconds(0.2f);
+            // ë°œì‚¬
+            if (spawner != null) spawner.CopyVanish(newData);
+
+            yield return new WaitForSeconds(0.3f);
         }
     }
 }

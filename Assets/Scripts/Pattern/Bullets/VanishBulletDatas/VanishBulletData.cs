@@ -5,6 +5,7 @@ public class VanishBulletData : MoveData
     public Vector3 originalLocation;
     public Vector3 direction;
     public float speed;
+    public float radious;
     public float detectionRadius;
     public string textContent;
 
@@ -13,7 +14,8 @@ public class VanishBulletData : MoveData
         originalLocation = bulletSettingInfo.OriginalLocation;
         direction = bulletSettingInfo.TargetLocation;
         speed = bulletSettingInfo.speed;
-        detectionRadius = bulletSettingInfo.radious;
+        radious = bulletSettingInfo.radious;
+        detectionRadius = bulletSettingInfo.detectionRadius;
         textContent = bulletSettingInfo.textContent;
     }
 }

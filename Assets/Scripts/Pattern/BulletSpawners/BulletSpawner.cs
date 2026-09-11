@@ -117,8 +117,22 @@ public class BulletSpawner : MonoBehaviour
 // 생성 메서드 추가
     public void CopyVanish(VanishBulletData vanishData)
     {
+        if (vanishBulletPrefab == null)
+        {
+            Debug.LogError("[BulletSpawner] vanishBulletPrefab이 할당되지 않았습니다! Inspector 창을 확인하세요.");
+            return;
+        }
+
+        Debug.Log($"[BulletSpawner] VanishBullet 생성 시도 - 위치: {vanishData.originalLocation}");
         GameObject vBullet = Instantiate(vanishBulletPrefab, vanishData.originalLocation, Quaternion.identity);
         VanishBullet vController = vBullet.GetComponent<VanishBullet>();
+        
+        if (vController == null)
+        {
+            Debug.LogError("[BulletSpawner] 생성된 프리팹에 VanishBullet 컴포넌트가 없습니다!");
+            return;
+        }
+
         vController.getData(vanishData);
     }
 }

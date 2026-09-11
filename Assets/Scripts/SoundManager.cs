@@ -5,7 +5,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgmSource;
     public AudioSource sfxSource;
 
-    // ¹è°æÀ½¾Ç º¯°æ ½Ã »ç¿ë
+    // ë°°ê²½ìŒì•… ë³€ê²½ ì‹œ ì‚¬ìš©
     public void ChangeBGM(AudioClip newClip)
     {
         bgmSource.Stop();
@@ -13,13 +13,13 @@ public class SoundManager : MonoBehaviour
         bgmSource.Play();
     }
 
-    // È¿°úÀ½ Àç»ı ½Ã »ç¿ë
+    // íš¨ê³¼ìŒ ì¬ìƒ ì‹œ ì‚¬ìš©
     public void PlayDamagedSFX(AudioClip clip)
     {
         sfxSource.clip = clip;
         sfxSource.time = 0f;
         sfxSource.volume = 0.5f;
-        // PlayOneShotÀ» ¾²¸é ÇÏ³ªÀÇ ¼Ò½º¿¡¼­ ¿©·¯ È¿°úÀ½À» ÁßÃ¸ÇØ¼­ ³¾ ¼ö ÀÖ½À´Ï´Ù.
+        // PlayOneShotì„ ì“°ë©´ í•˜ë‚˜ì˜ ì†ŒìŠ¤ì—ì„œ ì—¬ëŸ¬ íš¨ê³¼ìŒì„ ì¤‘ì²©í•´ì„œ ë‚¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
         sfxSource.PlayOneShot(sfxSource.clip);
     }
 
@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
         sfxSource.clip = clip;
         sfxSource.time = 0.5f;
         sfxSource.volume = 1.5f;
-        // PlayOneShotÀ» ¾²¸é ÇÏ³ªÀÇ ¼Ò½º¿¡¼­ ¿©·¯ È¿°úÀ½À» ÁßÃ¸ÇØ¼­ ³¾ ¼ö ÀÖ½À´Ï´Ù.
+        // PlayOneShotì„ ì“°ë©´ í•˜ë‚˜ì˜ ì†ŒìŠ¤ì—ì„œ ì—¬ëŸ¬ íš¨ê³¼ìŒì„ ì¤‘ì²©í•´ì„œ ë‚¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
         sfxSource.PlayOneShot(sfxSource.clip);
     }
 

@@ -4,8 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static TurnManager;
 /*
- * ÇÃ·¹ÀÌ¾î ½ºÅ©¸³Æ®
- * °æ°è Á¶Àı ¹× ¿òÁ÷ÀÌ±â
+ * í”Œë ˆì´ì–´ ìŠ¤í¬ë¦½íŠ¸
+ * ê²½ê³„ ì¡°ì ˆ ë° ì›€ì§ì´ê¸°
  */
 public class Player : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     {
 
         IsPlayerTurn = true;
-        // ±×³É Ä«¸Ş¶ó °¡ÀåÀÚ¸® ±¸ÇÏ´Â ÄÚµå
+        // ê·¸ëƒ¥ ì¹´ë©”ë¼ ê°€ì¥ìë¦¬ êµ¬í•˜ëŠ” ì½”ë“œ
         cam = Camera.main;
 
         float camHeight = 2f * cam.orthographicSize;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         minY = cam.transform.position.y - camHeight / 2f;
         maxY = cam.transform.position.y + camHeight / 2f;
 
-        // ½ÃÀÛ À§Ä¡ Á¦ÇÑ
+        // ì‹œì‘ ìœ„ì¹˜ ì œí•œ
         Vector3 pos = new Vector3(0f, -3.7f, 0f);
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
@@ -68,8 +68,8 @@ public class Player : MonoBehaviour
             }
 
             Vector3 target = new Vector3(0f, 0f, 0f);
-            target.x = movePositions[currentIndex].x; //x°ª
-            target.y = movePositions[currentIndex].y; //y°ª
+            target.x = movePositions[currentIndex].x; //xê°’
+            target.y = movePositions[currentIndex].y; //yê°’
             transform.position = target;
 
             yield return null;
@@ -86,15 +86,15 @@ public class Player : MonoBehaviour
             float upDown = Input.GetAxisRaw("Vertical");
             float leftRight = Input.GetAxisRaw("Horizontal");
 
-            // 1. ÀÌµ¿ÇÒ '¸ñÇ¥ À§Ä¡'¸¦ ¸ÕÀú °è»êÇÕ´Ï´Ù.
+            // 1. ì´ë™í•  'ëª©í‘œ ìœ„ì¹˜'ë¥¼ ë¨¼ì € ê³„ì‚°í•©ë‹ˆë‹¤.
             Vector2 movement = new Vector2(leftRight, upDown).normalized * speed * Time.deltaTime;
             Vector2 targetPos = rb.position + movement;
 
-            // 2. [ÇÙ½É] ¸ñÇ¥ À§Ä¡¸¦ ¹°¸® ÀÌµ¿ Àü¿¡ ¹Ì¸® Á¦ÇÑ(Clamp)ÇÕ´Ï´Ù.
+            // 2. [í•µì‹¬] ëª©í‘œ ìœ„ì¹˜ë¥¼ ë¬¼ë¦¬ ì´ë™ ì „ì— ë¯¸ë¦¬ ì œí•œ(Clamp)í•©ë‹ˆë‹¤.
             targetPos.x = Mathf.Clamp(targetPos.x, minX + 0.2f, maxX - 0.2f);
             targetPos.y = Mathf.Clamp(targetPos.y, minY + 0.2f, maxY - 0.2f);
 
-            // 3. ¹°¸® ¿£ÁøÀ» ÅëÇØ ºÎµå·´°Ô ÀÌµ¿ÇÕ´Ï´Ù.
+            // 3. ë¬¼ë¦¬ ì—”ì§„ì„ í†µí•´ ë¶€ë“œëŸ½ê²Œ ì´ë™í•©ë‹ˆë‹¤.
             rb.MovePosition(targetPos);
 
             yield return new WaitForFixedUpdate();

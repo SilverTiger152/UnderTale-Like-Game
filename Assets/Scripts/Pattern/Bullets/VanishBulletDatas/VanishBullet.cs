@@ -1,64 +1,128 @@
 using UnityEngine;
 using TMPro;
 
-public class VanishBullet : MonoBehaviour
+public class VanishBullet : MonoBehaviour, IBulletInfo
 {
-    private Vector3 moveDirection;
-    private float speed;
+    private Player player;
+    private VanishBulletData data;
 
-    [SerializeField] private CircleCollider2D detectionCollider;
+    public HPSizeControl HPSizeController { get; set; }
+    public Rigidbody2D rb { get; set; }
+
+    [SerializeField] private BoxCollider2D hitCollider;
     [SerializeField] private TextMeshPro textMesh;
 
     private void Awake()
     {
         if (textMesh == null)
             textMesh = GetComponent<TextMeshPro>();
+
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            rb = gameObject.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        hitCollider = GetComponent<BoxCollider2D>();
+        if (hitCollider == null)
+        {
+            hitCollider = gameObject.AddComponent<BoxCollider2D>();
+        }
+
+        CircleCollider2D circleCol = GetComponent<CircleCollider2D>();
+        if (circleCol != null)
+        {
+            Destroy(circleCol);
+        }
+
+        HPSizeController = Object.FindAnyObjectByType<HPSizeControl>();
+        player = Object.FindAnyObjectByType<Player>();
+        
+        if (HPSizeController == null) Debug.LogWarning("[VanishBullet] HPSizeControllerë¥¼ ì”¬ì—ì„œ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        if (player == null) Debug.LogWarning("[VanishBullet] Playerë¥¼ ì”¬ì—ì„œ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
     }
 
     public void getData(VanishBulletData data)
     {
-        transform.position = data.originalLocation;
-        moveDirection = data.direction.normalized;
-        speed = data.speed;
+        if (player != null && player.IsPlayerTurn && gameObject != null)
+        {
+            Debug.Log("[VanishBullet] í”Œë ˆì´ì–´ í„´ì´ë¯€ë¡œ ìƒì„± ì¦‰ì‹œ íŒŒê´´ë©ë‹ˆë‹¤.");
+            Destroy(gameObject);
+            return;
+        }
 
-        // 1. TextMeshPro ±ÛÀÚ ¼¼ÆÃ
+        this.data = data;
+        transform.position = data.originalLocation;
+        Debug.Log($"[VanishBullet] ë°ì´í„° ì´ˆê¸°í™” ë¨ - ìœ„ì¹˜: {data.originalLocation}, ì†ë„: {data.speed}, í…ìŠ¤íŠ¸: {data.textContent}");
+
         if (textMesh != null)
         {
             textMesh.text = data.textContent;
-        }
+            textMesh.ForceMeshUpdate();
 
-        // 2. °¨Áö ±¸¿ª ¹üÀ§ ¼³Á¤
-        if (detectionCollider != null)
+            if (hitCollider != null)
+            {
+                hitCollider.size = new Vector2(textMesh.textBounds.size.x, textMesh.textBounds.size.y);
+                hitCollider.offset = new Vector2(textMesh.textBounds.center.x, textMesh.textBounds.center.y);
+                hitCollider.isTrigger = true;
+                Debug.Log($"[VanishBullet] BoxCollider2D í¬ê¸° ìë™ ë§ì¶¤ ì™„ë£Œ: {hitCollider.size}");
+            }
+        }
+        else if (hitCollider != null)
         {
-            detectionCollider.radius = data.detectionRadius;
-            detectionCollider.isTrigger = true;
+            Debug.LogWarning("[VanishBullet] TextMeshProê°€ ì—°ê²°ë˜ì–´ ìˆì§€ ì•Šì•„ ê¸°ë³¸ ë°˜ê²½ìœ¼ë¡œ BoxCollider2Dë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.");
+            hitCollider.size = new Vector2(data.radious, data.radious);
+            hitCollider.isTrigger = true;
+        }
+        else
+        {
+            Debug.LogError("[VanishBullet] hitColliderë¥¼ ì„¤ì •í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤!");
         }
     }
 
     private void Update()
     {
-        // 3. ¿øÇü ÅºÈ¯°ú µ¿ÀÏÇÑ Á÷Áø ÀÌµ¿
-        transform.position += moveDirection * speed * Time.deltaTime;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        if (player != null && data != null)
         {
-            // °¨Áö ¿µ¿ª µé¾î¿À¸é ±ÛÀÚ ¼û±â±â
-            if (textMesh != null) textMesh.enabled = false;
-
-            // ÇÃ·¹ÀÌ¾î ÇÇ°İ ·ÎÁ÷ È£Ãâ (ÇÁ·ÎÁ§Æ® ÇÇ°İ ÇÔ¼ö¸í¿¡ ¸ÂÃç »ç¿ë)
-            // collision.GetComponent<PlayerController>()?.TakeDamage();
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if (distance <= data.detectionRadius)
+            {
+                if (textMesh != null && textMesh.enabled)
+                {
+                    textMesh.enabled = false;
+                    Debug.Log($"[VanishBullet] í”Œë ˆì´ì–´ê°€ ê°ì§€ ì˜ì—­({data.detectionRadius}) ë‚´ì— ì§„ì…! (ê±°ë¦¬: {distance:F2}) - íƒ„í™˜ íˆ¬ëª…í™”");
+                }
+            }
+            else
+            {
+                if (textMesh != null && !textMesh.enabled)
+                {
+                    textMesh.enabled = true;
+                    Debug.Log($"[VanishBullet] í”Œë ˆì´ì–´ê°€ ê°ì§€ ì˜ì—­ ë°–ìœ¼ë¡œ ë‚˜ê° (ê±°ë¦¬: {distance:F2}) - íƒ„í™˜ í‘œì‹œ");
+                }
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void FixedUpdate()
     {
-        if (collision.CompareTag("Player"))
+        if (data != null && rb != null)
         {
-            // °¨Áö ¿µ¿ª ¹ş¾î³ª¸é ±ÛÀÚ ´Ù½Ã º¸ÀÌ±â
-            if (textMesh != null) textMesh.enabled = true;
+            rb.linearVelocity = data.direction * data.speed;
+        }
+        else if (rb == null)
+        {
+            Debug.LogError("[VanishBullet] Rigidbody2D ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤! íƒ„í™˜ì´ ì´ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+        }
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && HPSizeController != null)
+        {
+            Debug.LogWarning("[VanishBullet] ğŸ’¥ í”Œë ˆì´ì–´ í”¼ê²© íŒì •ë¨! ğŸ’¥ ë°ë¯¸ì§€ ë¡œì§ ì‹¤í–‰");
+            HPSizeController.StartCoroutine(HPSizeController.muzukshigan(1f));
         }
     }
 }

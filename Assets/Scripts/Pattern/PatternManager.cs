@@ -29,7 +29,7 @@ public class PatternManager : MonoBehaviour
         TextAsset textAsset = Resources.Load<TextAsset>("json/patternList");
         if (textAsset == null)
         {
-            Debug.LogError("patternList ���� ��ã��!");
+            Debug.LogError("patternList 占쏙옙占쏙옙 占쏙옙찾占쏙옙!");
             return;
         }
         string jsonData = textAsset.text;
@@ -37,29 +37,29 @@ public class PatternManager : MonoBehaviour
         patternListData = JsonUtility.FromJson<PatternListWrap>(textAsset.text);
         if (patternListData.patterns == null)
         {
-            Debug.LogError("���� ������ �Ľ� ����!");
+            Debug.LogError("占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占식쏙옙 占쏙옙占쏙옙!");
             return;
         }
 
-        // 1. �ݵ�� �ʱ�ȭ�� ���� �ؾ� NullReferenceException�� �� ���ϴ�.
+        // 1. 占쌥듸옙占� 占십깍옙화占쏙옙 占쏙옙占쏙옙 占쌔억옙 NullReferenceException占쏙옙 占쏙옙 占쏙옙占싹댐옙.
         patternDictionary = new Dictionary<string, IPatternInfo>();
 
-        // 2. �������̽��� ������ ��� ������Ʈ�� �����ɴϴ�.
+        // 2. 占쏙옙占쏙옙占쏙옙占싱쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙트占쏙옙 占쏙옙占쏙옙占심니댐옙.
         IPatternInfo[] patterns = GetComponentsInChildren<IPatternInfo>();
 
         foreach (var p in patterns)
         {
             string patternName = p.GetType().Name;
 
-            // 3. �ߺ� ��� ����: �Ȱ��� �̸��� ���� Ŭ������ ���� �� ���� ���
+            // 3. 占쌩븝옙 占쏙옙占� 占쏙옙占쏙옙: 占싫곤옙占쏙옙 占싱몌옙占쏙옙 占쏙옙占쏙옙 클占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙 占쏙옙占�
             if (!patternDictionary.ContainsKey(patternName))
             {
                 patternDictionary.Add(patternName, p);
-                Debug.Log($"���� ��� ����: {patternName}");
+                Debug.Log($"占쏙옙占쏙옙 占쏙옙占� 占쏙옙占쏙옙: {patternName}");
             }
             else
             {
-                Debug.LogWarning($"�ߺ��� ���� Ŭ���� �߰�: {patternName}. �ϳ��� ��ϵ˴ϴ�.");
+                Debug.LogWarning($"占쌩븝옙占쏙옙 占쏙옙占쏙옙 클占쏙옙占쏙옙 占쌩곤옙: {patternName}. 占싹놂옙占쏙옙 占쏙옙溝絳求占�.");
             }
         }
     }
@@ -87,16 +87,16 @@ public class PatternManager : MonoBehaviour
 
         //DetermineBullets(bullets);
 
-        // patternID��� �̸��� ��ųʸ��� �ִ��� Ȯ���ϰ�, ������ target�� �־���
+        // patternID占쏙옙占� 占싱몌옙占쏙옙 占쏙옙킬訶占쏙옙占� 占쌍댐옙占쏙옙 확占쏙옙占싹곤옙, 占쏙옙占쏙옙占쏙옙 target占쏙옙 占쌍억옙占쏙옙
         if (patternDictionary.TryGetValue(id, out IPatternInfo target))
         {
-            // ����: ���� ����
+            // 占쏙옙占쏙옙: 占쏙옙占쏙옙 占쏙옙占쏙옙
             yield return StartCoroutine(target.PatternExecute(duration));
         }
         else
         {
-            // ����: JSON�� ��Ÿ�� �ְų� ��ϵ��� ���� ������
-            Debug.LogError($"���� {id}�� ã�� �� �����ϴ�!");
+            // 占쏙옙占쏙옙: JSON占쏙옙 占쏙옙타占쏙옙 占쌍거놂옙 占쏙옙溝占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙
+            Debug.LogError($"占쏙옙占쏙옙 {id}占쏙옙 찾占쏙옙 占쏙옙 占쏙옙占쏙옙占싹댐옙!");
         }
 
         // -----------------------------------------------------------------------------------
@@ -145,12 +145,12 @@ public class PatternManager : MonoBehaviour
     }
     //public void DetermineBullets(List<string> BulletList)
     //{
-    //    foreach (var raw in BulletList) // ���⼭ raw�� ���ڿ� type�� ���� ���� Ŭ����
+    //    foreach (var raw in BulletList) // 占쏙옙占썩서 raw占쏙옙 占쏙옙占쌘울옙 type占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 클占쏙옙占쏙옙
     //    {
     //        MoveData dataInstance = raw switch
     //        {
-    //            "Circle" => new CircleBulletData { /* �� ���� */ },
-    //            //"Square" => new SquareBulletData { /* �� ���� */ },
+    //            "Circle" => new CircleBulletData { /* 占쏙옙 占쏙옙占쏙옙 */ },
+    //            //"Square" => new SquareBulletData { /* 占쏙옙 占쏙옙占쏙옙 */ },
     //            _ => null
     //        };
 
