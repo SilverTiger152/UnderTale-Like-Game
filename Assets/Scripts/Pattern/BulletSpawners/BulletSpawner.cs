@@ -13,6 +13,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] public GameObject mirrorGimmikPrefab; // 미러 기믹 프리팹 등록용
     [SerializeField] public GameObject vanishBulletPrefab;
     [SerializeField] public GameObject pannobGimmikPrefab; // 패놉 기믹 프리팹 등록용
+    [SerializeField] public GameObject returnGimmikPrefab; // 리턴 기믹 프리팹 등록용
 
     [SerializeField] private AudioClip warningSound; // 인스펙터에서 효과음 등록
     [SerializeField] private SoundManager soundManager;
@@ -60,6 +61,18 @@ public void CopyPannob(PannobGimmikData pannobGimmikData)
     GameObject pannobObj = Instantiate(pannobGimmikPrefab); 
     PannobGimmik pannobController = pannobObj.GetComponent<PannobGimmik>();
     pannobController.StartPannobEffect(pannobGimmikData);
+}
+
+public void CopyReturn(ReturnGimmikData returnBulletData)
+{
+    if (returnGimmikPrefab == null)
+    {
+        Debug.LogError("[BulletSpawner] returnGimmikPrefab이 할당되지 않았습니다! Inspector 창을 확인하세요.");
+        return;
+    }
+    GameObject returnObj = Instantiate(returnGimmikPrefab); 
+    ReturnGimmik returnController = returnObj.GetComponent<ReturnGimmik>();
+    returnController.StartRegressionEffect(returnBulletData);
 }
 
     public IEnumerator CopySquare(SquareBulletData squareBulletData)

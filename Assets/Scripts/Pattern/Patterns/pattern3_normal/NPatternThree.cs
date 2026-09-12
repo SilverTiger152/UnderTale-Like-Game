@@ -58,7 +58,7 @@ public class NPatternThree : MonoBehaviour, IPatternInfo
             Vector3 direction = (new Vector3(-10f, originalPosition.y, 0f) - originalPosition).normalized;
 
             // 1. �������� �� ä���?
-            bulletSettings.setCircleSettings(originalPosition, direction, 10f, 0.6f);
+            bulletSettings.setCircleSettings(originalPosition, direction, 10f, 0.6f, 0f);
 
             // 2. [����] �̹� źȯ���� ���� ���� ������ ��ü ����
             CircleBulletData newData = new CircleBulletData();

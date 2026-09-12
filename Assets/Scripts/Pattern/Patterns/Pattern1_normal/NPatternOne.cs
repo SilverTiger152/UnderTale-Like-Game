@@ -64,14 +64,11 @@ public class NPatternOne : MonoBehaviour, IPatternInfo
             Quaternion rotation = Quaternion.Euler(0, 0, angle);
             Vector3 direction = rotation * Vector3.up;
 
-            // 1. �������� �� ä���
-            bulletSettings.setCircleSettings(new Vector3(0f, 0f, 0f), direction, 3f, 1f);
+            bulletSettings.setCircleSettings(new Vector3(0f, 0f, 0f), direction, 3f, 1f, 0f);
 
-            // 2. [����] �̹� źȯ���� ���� ���� ������ ��ü ����
             CircleBulletData newData = new CircleBulletData();
             newData.ApplyTo(bulletSettings);
 
-            // 3. ���
             spawner.CopyCircle(newData);
 
             yield return new WaitForSeconds(0.05f);

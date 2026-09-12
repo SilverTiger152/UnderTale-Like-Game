@@ -7,6 +7,7 @@ public class CircleBulletData : MoveData
     public float speed;
     public Vector3 direction;
     public float radious;
+    public float acceleration;
 
     public override void ApplyTo(BulletSettings bulletSettingInfo)
     {
@@ -14,5 +15,6 @@ public class CircleBulletData : MoveData
         speed = bulletSettingInfo.speed;
         direction = bulletSettingInfo.TargetLocation;
         radious = bulletSettingInfo.radious;
+        acceleration = bulletSettingInfo.acceleration;
     }
 }

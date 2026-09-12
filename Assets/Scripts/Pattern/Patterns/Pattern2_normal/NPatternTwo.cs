@@ -59,7 +59,8 @@ public class NPatternTwo : MonoBehaviour, IPatternInfo
                 8f,                      // s:
                 0.7f,                    // r:
                 3.5f,                    // dr:
-                "Vanish"                 // text:
+                "Vanish",                //text:
+                0f                       // acceleration:
             );
 
             VanishBulletData newData = new VanishBulletData();

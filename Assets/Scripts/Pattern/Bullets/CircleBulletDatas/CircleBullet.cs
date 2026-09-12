@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-//get data로 받고 복사하고 움직이고 충돌감지하는 것만 해야됨
-
 public class CircleBullet : MonoBehaviour, IBulletInfo
 {
     private Player player;
@@ -12,9 +10,10 @@ public class CircleBullet : MonoBehaviour, IBulletInfo
     public Rigidbody2D rb { set; get; }
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); // 실제 내 리지드바디를 가져옴
+        rb = GetComponent<Rigidbody2D>(); // rd 가져오기
         HPSizeController = Object.FindAnyObjectByType<HPSizeControl>();
         player = Object.FindAnyObjectByType<Player>();
+        Destroy(gameObject, 10f); // 
     }
 
     public void getData(CircleBulletData data)
@@ -33,21 +32,25 @@ public class CircleBullet : MonoBehaviour, IBulletInfo
         }
     }
 
-    public void OnTriggerStay2D(Collider2D collision) //데미지 넣음
+    public void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && HPSizeController != null)
         {
-            // 진짜 HP 관리자에게 데미지를 입히라고 명령합니다.
             HPSizeController.StartCoroutine(HPSizeController.muzukshigan(1f));
-            Debug.Log("으앙 아프다");
+            Debug.Log("占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙");
         }
     }
 
     void FixedUpdate()
     {
+
         if (data != null && rb != null)
         {
+            data.speed += data.acceleration * Time.fixedDeltaTime; // 媛??냽?룄 ?쟻?슜
+
             rb.linearVelocity = data.direction * data.speed;
         }
     }
+
+
 }

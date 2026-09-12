@@ -129,6 +129,7 @@ public class VanishBullet : MonoBehaviour, IBulletInfo
     {
         if (data != null && rb != null)
         {
+            data.speed += data.acceleration * Time.fixedDeltaTime; // 가속도 적용
             rb.linearVelocity = data.direction * data.speed;
         }
         else if (rb == null)

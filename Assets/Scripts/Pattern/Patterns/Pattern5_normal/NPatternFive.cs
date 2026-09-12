@@ -1,28 +1,25 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class NPatternFive : MonoBehaviour, IPatternInfo
 {
     [SerializeField] private BulletSpawner spawner;
+
     public IEnumerator PatternExecute(float duration)
     {
-        Coroutine shootLinearCoroutine = StartCoroutine(LinearFunction());
+        // 4초, 8초 시점에 2초 전으로 되돌아가는 회귀 기믹 발동
+        SpawnReturnGimmick(4f);
+        SpawnReturnGimmick(8f);
+
+        Coroutine shootCircleCoroutine = StartCoroutine(CircleBullet());
 
         yield return new WaitForSeconds(duration);
 
-        StopCoroutine(shootLinearCoroutine);
+        StopCoroutine(shootCircleCoroutine);
         StopAllCoroutines();
         spawner.StopAllCoroutines();
 
-        // ��� ����� ����
-        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>();
-        foreach (LineRenderer line in warningLines)
-        {
-            if (line.gameObject != null) Destroy(line.gameObject);
-        }
-
-        // ��� �Ѿ� ����
+        // 모든 총알 삭제
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
@@ -30,32 +27,55 @@ public class NPatternFive : MonoBehaviour, IPatternInfo
         }
     }
 
-    private IEnumerator LinearFunction()
+    private void SpawnReturnGimmick(float returnTime)
+    {
+        BulletSettings returnSettings = new BulletSettings();
+        returnSettings.setReturnSettings(returnTime);
+
+        ReturnGimmikData returnData = new ReturnGimmikData();
+        returnData.ApplyTo(returnSettings);
+
+        spawner.CopyReturn(returnData);
+    }
+
+    private IEnumerator CircleBullet()
     {
         BulletSettings bulletSettings = new BulletSettings();
 
         while (true)
         {
-            float slope = Random.Range(-4f, 4f);
+            // 상자 크기 4방향 외곽에서 스폰 위치 계산
+            int side = Random.Range(0, 4);
+            Vector3 spawnPos = Vector3.zero;
 
-            while (slope < -2f || slope > 2f)
+            switch (side)
             {
-                slope = Random.Range(-4f, 4f); // 0�� ������ �ٽ� ����
+                case 0: // 상단에서 스폰 -> 아래로
+                    spawnPos = new Vector3(Random.Range(-2.3f, 2.3f), 4.5f, 0f);
+                    break;
+                case 1: // 하단에서 스폰 -> 위로
+                    spawnPos = new Vector3(Random.Range(-2.3f, 2.3f), -4.5f, 0f);
+                    break;
+                case 2: // 좌측에서 스폰 -> 우측으로
+                    spawnPos = new Vector3(-4.5f, Random.Range(-2.3f, 2.3f), 0f);
+                    break;
+                case 3: // 우측에서 스폰 -> 좌측으로
+                    spawnPos = new Vector3(4.5f, Random.Range(-2.3f, 2.3f), 0f);
+                    break;
             }
 
-            float positionY = (slope < 0f) ? 4f : -4f;
-            float positionX = (slope < 0f) ? Random.Range(-4f, 0f) : Random.Range(0f, 4f);
+            // 상자 중심부를 향해 발사 방향 설정
+            Vector3 targetPos = new Vector3(Random.Range(-1.8f, 1.8f), Random.Range(-1.8f, 1.8f), 0f);
+            Vector3 direction = (targetPos - spawnPos).normalized;
 
-            Vector3 position = new Vector3(positionX, positionY, 0f);
+            bulletSettings.setCircleSettings(spawnPos, direction, 4.5f, 0.6f, 0f);
 
-            bulletSettings.setLinearFunctionSettings(position, 9f, 0.3f, slope, 1f);
-
-            LinearFunctionData newData = new LinearFunctionData();
+            CircleBulletData newData = new CircleBulletData();
             newData.ApplyTo(bulletSettings);
 
-            spawner.CopyLinearFunction(newData);
+            spawner.CopyCircle(newData);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.35f);
         }
     }
 }

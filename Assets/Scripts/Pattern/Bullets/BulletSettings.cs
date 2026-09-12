@@ -28,12 +28,17 @@ public class BulletSettings
     public float darkTime;
     public float targetVisionScale;
 
-    public void setCircleSettings(Vector3 ol, Vector3 tl, float s, float r)
+    public float  acceleration;
+
+    public float returnTime;
+
+    public void setCircleSettings(Vector3 ol, Vector3 tl, float s, float r, float ac)
     {
         OriginalLocation = ol;
         TargetLocation = tl;
         speed = s; 
         radious = r;
+        acceleration = ac;
     }
 
     public void setSquareSettings(Vector3 ol, float i, float w, float h, float st)
@@ -83,7 +88,7 @@ public class BulletSettings
         targetVisionScale = tv;
     }
 
-    public void setVanishSettings(Vector3 ol, Vector3 tl, float s, float r, float dr, string text)
+    public void setVanishSettings(Vector3 ol, Vector3 tl, float s, float r, float dr, string text,  float ac)
     {
         OriginalLocation = ol;
         TargetLocation = tl;
@@ -91,6 +96,12 @@ public class BulletSettings
         radious = r;
         detectionRadius = dr;
         textContent = text;
+        acceleration = ac;
+    }
+
+    public void setReturnSettings(float rt)
+    {
+        returnTime = rt;
     }
 
     private float getInterval(float radious, float speed)

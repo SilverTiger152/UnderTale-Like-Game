@@ -484,7 +484,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 2105644655
-  m_SortingLayer: 10
+  m_SortingLayer: 11
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -982,6 +982,7 @@ GameObject:
   - component: {fileID: 648842168}
   - component: {fileID: 648842170}
   - component: {fileID: 648842169}
+  - component: {fileID: 648842171}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1142,6 +1143,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &648842171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648842164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f36bd2fa6f589459a232c729ea0c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeTracker
+  rewindTime: 2
 --- !u!1 &717932066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1749,7 @@ MonoBehaviour:
   mirrorGimmikPrefab: {fileID: 1684581209422060694, guid: 5c1a2ee3f4fcef64ca2cc2636129e061, type: 3}
   vanishBulletPrefab: {fileID: 2950097813020526458, guid: c9c65dae8c672324ca3f26f3d853eec6, type: 3}
   pannobGimmikPrefab: {fileID: 3496700959215013514, guid: bd369282a164bd2458d7f22aea516a2d, type: 3}
+  returnGimmikPrefab: {fileID: 7067684364036264396, guid: bded1efbb2d67264ca6751fe3ef4875c, type: 3}
   warningSound: {fileID: 8300000, guid: 2eeef2e73bfa9344ca08c9c3e0b05e2d, type: 3}
   soundManager: {fileID: 1843658813}
   blinkInterval: 0.1
@@ -2005,8 +2020,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1279113003
-  m_SortingLayer: 3
+  m_SortingLayerID: -942255419
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}

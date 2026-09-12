@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4978750505647058013}
   - component: {fileID: 428771535802652289}
   - component: {fileID: -7352886938793215946}
+  - component: {fileID: -6892300693694966276}
   m_Layer: 0
   m_Name: QuadraticFunction
   m_TagString: Bullet
@@ -37,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3872315842411950689
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,6 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 1245399633
   m_SortingLayer: 7
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0, g: 0.7490196, b: 1, a: 1}
   m_FlipX: 0
@@ -91,8 +94,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!50 &4978750505647058013
 Rigidbody2D:
   serializedVersion: 5
@@ -171,3 +174,19 @@ MonoBehaviour:
   warningLinePrefab: {fileID: 6897446843546529784, guid: 1896db1a553d07d42b4005b1bfb89bca, type: 3}
   lr: {fileID: 0}
   fp: {fileID: 8015663417464990484, guid: b1f6b1c73faf1394c959c3e601d1fc7d, type: 3}
+  functionsPointData:
+    radious: 0
+    sustainmentTime: 0
+--- !u!114 &-6892300693694966276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618125250495823791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f36bd2fa6f589459a232c729ea0c96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeTracker
+  rewindTime: 2

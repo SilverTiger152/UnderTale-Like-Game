@@ -8,6 +8,7 @@ public class VanishBulletData : MoveData
     public float radious;
     public float detectionRadius;
     public string textContent;
+    public float acceleration;
 
     public override void ApplyTo(BulletSettings bulletSettingInfo)
     {
@@ -17,5 +18,6 @@ public class VanishBulletData : MoveData
         radious = bulletSettingInfo.radious;
         detectionRadius = bulletSettingInfo.detectionRadius;
         textContent = bulletSettingInfo.textContent;
+        acceleration = bulletSettingInfo.acceleration;
     }
 }
