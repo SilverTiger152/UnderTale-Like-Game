@@ -10,6 +10,7 @@ public class PatternManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField]private int patternIndex = 0;
 
+    [System.NonSerialized]
     public Dictionary<string, IPatternInfo> patternDictionary;
 
     [SerializeField] private GameObject textBoxInside;

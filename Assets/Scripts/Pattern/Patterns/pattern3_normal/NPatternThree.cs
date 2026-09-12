@@ -6,6 +6,8 @@ public class NPatternThree : MonoBehaviour, IPatternInfo
     [SerializeField] private BulletSpawner spawner;
     public IEnumerator PatternExecute(float duration)
     {
+        SpawnPannobGimmick(0f, 11.0f, 0.8f); // ?˜ˆ?‹œ: 1ì´? ?’¤ ë°œë™, 3ì´? ?™?•ˆ ?œ ì§?, ?‹œ?•¼ ? œ?•œ ?¬ê¸? 0.5
+
         Coroutine shootCircleCoroutine = StartCoroutine(CircleBullet());
 
         yield return new WaitForSeconds(duration);
@@ -14,23 +16,38 @@ public class NPatternThree : MonoBehaviour, IPatternInfo
         StopAllCoroutines();
         spawner.StopAllCoroutines();
 
-        // ¸ğµç °æ°í¼± »èÁ¦
-        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
+        // ï¿½ï¿½ï¿? ï¿½ï¿½ï¿½ï¿½ï¿? ï¿½ï¿½ï¿½ï¿½
+        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>();
         foreach (LineRenderer line in warningLines)
         {
             if (line.gameObject != null) Destroy(line.gameObject);
         }
 
-        // ¸ğµç ÃÑ¾Ë »èÁ¦
+        // ï¿½ï¿½ï¿? ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
             if (bullet != null) Destroy(bullet);
         }
     }
+
+    private void SpawnPannobGimmick(float darkTime, float duration, float targetVisionScale)
+    {
+        // 1. ?„¤? • ë³´ë”°ë¦¬ì— ?Œ¬?…¸ë¸? ê¸°ë?? ?°?´?„° ?„¸?Œ…[cite: 3]
+        BulletSettings pannobSettings = new BulletSettings();
+        pannobSettings.setPannobGimmikSettings(darkTime, duration, targetVisionScale);
+
+        // 2. PannobGimmikData ?ƒ?„± ë°? ?°?´?„° ? ?š©[cite: 6]
+        PannobGimmikData pannobData = new PannobGimmikData();
+        pannobData.ApplyTo(pannobSettings);
+
+        // 3. BulletSpawnerë¡? ?ƒ?„± ? „?‹¬[cite: 7]
+        spawner.CopyPannob(pannobData);
+    }
+
     private IEnumerator CircleBullet()
     {
-        // º¸µû¸®´Â Àç»ç¿ëÇØµµ µÇÁö¸¸, µ¥ÀÌÅÍ »óÀÚ´Â ¸Å¹ø »õ·Î ¸¸µå´Â °Ô ¾ÈÀüÇÕ´Ï´Ù.
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú´ï¿½ ï¿½Å¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
         BulletSettings bulletSettings = new BulletSettings();
 
         while (true)
@@ -40,14 +57,14 @@ public class NPatternThree : MonoBehaviour, IPatternInfo
 
             Vector3 direction = (new Vector3(-10f, originalPosition.y, 0f) - originalPosition).normalized;
 
-            // 1. º¸µû¸®¿¡ °ª Ã¤¿ì±â
+            // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿?
             bulletSettings.setCircleSettings(originalPosition, direction, 10f, 0.6f);
 
-            // 2. [¼öÁ¤] ÀÌ¹ø ÅºÈ¯¸¸À» À§ÇÑ Àü¿ë µ¥ÀÌÅÍ °´Ã¼ »ı¼º
+            // 2. [ï¿½ï¿½ï¿½ï¿½] ï¿½Ì¹ï¿½ ÅºÈ¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
             CircleBulletData newData = new CircleBulletData();
             newData.ApplyTo(bulletSettings);
 
-            // 3. ¹è´Ş
+            // 3. ï¿½ï¿½ï¿?
             spawner.CopyCircle(newData);
 
             yield return new WaitForSeconds(0.1f);

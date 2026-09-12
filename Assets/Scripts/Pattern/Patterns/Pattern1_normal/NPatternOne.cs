@@ -23,7 +23,7 @@ public class NPatternOne : MonoBehaviour, IPatternInfo
         StopAllCoroutines();
         spawner.StopAllCoroutines();
 
-        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
+        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>();
         foreach (LineRenderer line in warningLines)
         {
             if (line.gameObject != null) Destroy(line.gameObject);

@@ -18,12 +18,12 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
     private float elapsedTime = 0f;
     private float yOffset;
 
-    private int pointCount = 40; // ¼±À» ±¸¼ºÇÒ Á¡ÀÇ °³¼ö
+    private int pointCount = 40; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     void Awake()
     {
         functionsPointData = new FunctionsPointData();
-        rb = GetComponent<Rigidbody2D>(); // ½ÇÁ¦ ³» ¸®Áöµå¹Ùµð¸¦ °¡Á®¿È
+        rb = GetComponent<Rigidbody2D>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ùµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         HPSizeController = Object.FindAnyObjectByType<HPSizeControl>();
 
         lineObj = Instantiate(warningLinePrefab);
@@ -40,9 +40,9 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
     {
         if (collision.CompareTag("Player") && HPSizeController != null)
         {
-            // ÁøÂ¥ HP °ü¸®ÀÚ¿¡°Ô µ¥¹ÌÁö¸¦ ÀÔÈ÷¶ó°í ¸í·ÉÇÕ´Ï´Ù.
+            // ï¿½ï¿½Â¥ HP ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
             HPSizeController.StartCoroutine(HPSizeController.muzukshigan(1f));
-            Debug.Log("À¸¾Ó ¾ÆÇÁ´Ù");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
         }
     }
 
@@ -61,16 +61,16 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
         {
             lr = lineObj.GetComponent<LineRenderer>();
 
-            // 1. ÃÊ±â À§Ä¡ ¹× ½Ã°£ ¼³Á¤
+            // 1. ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
             transform.localPosition = data.originalLocation;
             transform.localScale = Vector3.one * data.radious;
             elapsedTime = 0f;
 
-            // 2. yOffset °è»ê: ½ÃÀÛÁ¡(x=0)¿¡¼­ °ø½ÄÀÇ y°ªÀ» ¹Ì¸® ±¸ÇÔ
+            // 2. yOffset ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(x=0)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½
             // y = a(0 - p)^2 + q
             yOffset = data.a * Mathf.Pow(-data.p, 2) + data.q;
 
-            // 3. °î¼± °æ°í¼± ±×¸®±â (¼±ÅÃ »çÇ×)
+            // 3. ï¿½î¼± ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
             DrawQuadraticLine();
         }
 
@@ -78,7 +78,7 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
     }
     private IEnumerator copyPoint()
     {
-        int currentPointIndex = 0; // ÇöÀç Áö¿ì°í ÀÖ´Â Á¡ÀÇ ÀÎµ¦½º
+        int currentPointIndex = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
 
         while (true)
         {
@@ -90,10 +90,10 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
             functionsPointData.setInfo(data.radious, data.sustainmentTime);
             pointScript.getData(functionsPointData);
 
-            // [¼öÁ¤] ¼±À» ¾Õ¿¡¼­ºÎÅÍ Áö¿ì´Â ·ÎÁ÷ (½ÃÀÛÁ¡À» ÅºÈ¯ À§Ä¡·Î ÀÌµ¿)
+            // [ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½Õ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ÅºÈ¯ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½)
             if (lr != null && currentPointIndex < lr.positionCount)
             {
-                // ÅºÈ¯ÀÌ Áö³ª°£ À§Ä¡ÀÇ Á¡µéÀ» ÇöÀç ÅºÈ¯ À§Ä¡·Î ¸ð¾Æ¹ö¸² (¼±ÀÌ Âª¾ÆÁö´Â È¿°ú)
+                // ÅºÈ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ÅºÈ¯ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Æ¹ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ Âªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½)
                 for (int i = 0; i <= currentPointIndex; i++)
                 {
                     lr.SetPosition(i, transform.position);
@@ -111,16 +111,16 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
 
         elapsedTime += Time.fixedDeltaTime;
 
-        // 1. °¡·Î ÀÌµ¿ °Å¸® (x)
+        // 1. ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Å¸ï¿½ (x)
         float relativeX = elapsedTime * data.speed;
 
-        // 2. ÀÌÂ÷ÇÔ¼ö °ø½Ä Àû¿ë (y) ¹× º¸Á¤°ª(yOffset) Â÷°¨
+        // 2. ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (y) ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(yOffset) ï¿½ï¿½ï¿½ï¿½
         // relativeY = a * (x - p)^2 + q - yOffset
         float relativeY = (data.a * Mathf.Pow(relativeX - data.p, 2)) + data.q - yOffset;
 
-        // 3. ÃÖÁ¾ À§Ä¡ °è»ê ¹× Àû¿ë
+        // 3. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 nextPos = new Vector3(
-            data.originalLocation.x + (relativeX * data.xDir), // ¹æÇâ(1 or -1) ¹Ý¿µ
+            data.originalLocation.x + (relativeX * data.xDir), // ï¿½ï¿½ï¿½ï¿½(1 or -1) ï¿½Ý¿ï¿½
             data.originalLocation.y + relativeY,
             0f
         );
@@ -136,7 +136,7 @@ public class QuadraticFunction : MonoBehaviour, IBulletInfo
 
         for (int i = 0; i < pointCount; i++)
         {
-            // [¼öÁ¤] i * 0.5f ´ë½Å ÅºÈ¯ÀÇ ¼Óµµ¿Í intervalÀ» °í·ÁÇÑ °£°Ý »ç¿ë ÃßÃµ
+            // [ï¿½ï¿½ï¿½ï¿½] i * 0.5f ï¿½ï¿½ï¿½ ÅºÈ¯ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ intervalï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Ãµ
             float x = i * (data.speed * data.interval);
             float y = (data.a * Mathf.Pow(x - data.p, 2)) + data.q - yOffset;
 

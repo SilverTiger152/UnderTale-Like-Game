@@ -11,6 +11,9 @@ public class VanishBullet : MonoBehaviour, IBulletInfo
 
     [SerializeField] private BoxCollider2D hitCollider;
     [SerializeField] private TextMeshPro textMesh;
+    [SerializeField] private float fadeDuration = 0.2f;
+
+    private bool isPlayerInside = false;
 
     private void Awake()
     {
@@ -56,8 +59,14 @@ public class VanishBullet : MonoBehaviour, IBulletInfo
         transform.position = data.originalLocation;
         Debug.Log($"[VanishBullet] 데이터 초기화 됨 - 위치: {data.originalLocation}, 속도: {data.speed}, 텍스트: {data.textContent}");
 
+        isPlayerInside = false;
+
         if (textMesh != null)
         {
+            textMesh.enabled = true;
+            Color color = textMesh.color;
+            color.a = 1f;
+            textMesh.color = color;
             textMesh.text = data.textContent;
             textMesh.ForceMeshUpdate();
 
@@ -86,21 +95,32 @@ public class VanishBullet : MonoBehaviour, IBulletInfo
         if (player != null && data != null)
         {
             float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance <= data.detectionRadius)
+            bool isInside = distance <= data.detectionRadius;
+
+            if (isInside && !isPlayerInside)
             {
-                if (textMesh != null && textMesh.enabled)
-                {
-                    textMesh.enabled = false;
-                    Debug.Log($"[VanishBullet] 플레이어가 감지 영역({data.detectionRadius}) 내에 진입! (거리: {distance:F2}) - 탄환 투명화");
-                }
+                isPlayerInside = true;
+                Debug.Log($"[VanishBullet] 플레이어가 감지 영역({data.detectionRadius}) 내에 진입! (거리: {distance:F2}) - 탄환 페이드아웃 시작");
             }
-            else
+            else if (!isInside && isPlayerInside)
             {
-                if (textMesh != null && !textMesh.enabled)
+                isPlayerInside = false;
+                Debug.Log($"[VanishBullet] 플레이어가 감지 영역 밖으로 나감 (거리: {distance:F2}) - 탄환 페이드인 시작");
+            }
+
+            if (textMesh != null)
+            {
+                float targetAlpha = isPlayerInside ? 0f : 1f;
+                Color color = textMesh.color;
+                if (fadeDuration > 0f)
                 {
-                    textMesh.enabled = true;
-                    Debug.Log($"[VanishBullet] 플레이어가 감지 영역 밖으로 나감 (거리: {distance:F2}) - 탄환 표시");
+                    color.a = Mathf.MoveTowards(color.a, targetAlpha, Time.deltaTime / fadeDuration);
                 }
+                else
+                {
+                    color.a = targetAlpha;
+                }
+                textMesh.color = color;
             }
         }
     }

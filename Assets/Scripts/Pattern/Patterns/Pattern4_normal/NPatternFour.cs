@@ -14,14 +14,14 @@ public class NPatternFour : MonoBehaviour, IPatternInfo
         StopAllCoroutines();
         spawner.StopAllCoroutines();
 
-        // ¸ðµç °æ°í¼± »èÁ¦
-        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>();
         foreach (LineRenderer line in warningLines)
         {
             if (line.gameObject != null) Destroy(line.gameObject);
         }
 
-        // ¸ðµç ÃÑ¾Ë »èÁ¦
+        // ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {

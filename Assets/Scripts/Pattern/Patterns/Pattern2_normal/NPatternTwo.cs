@@ -20,7 +20,7 @@ public class NPatternTwo : MonoBehaviour, IPatternInfo
         StopCoroutine(bulletRoutine);
 
         // 4. 경고선 제거
-        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
+        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>();
         foreach (LineRenderer line in warningLines)
         {
             if (line.gameObject != null) Destroy(line.gameObject);
@@ -58,7 +58,7 @@ public class NPatternTwo : MonoBehaviour, IPatternInfo
                 direction,               // tl:
                 8f,                      // s:
                 0.7f,                    // r:
-                1.5f,                    // dr:
+                3.5f,                    // dr:
                 "Vanish"                 // text:
             );
 

@@ -21,7 +21,7 @@
             "id": "NPatternThree",
             "boxSize": [13, 9],
             "boxPosition": [0, 0],
-            "bullets": ["Circle"],
+            "bullets": ["Circle", "Pannob"],
             "duration": 11
        },
        {

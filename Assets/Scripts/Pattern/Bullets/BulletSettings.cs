@@ -14,7 +14,7 @@ public class BulletSettings
 
     public float slope;
 
-    public float a;                // ï¿½ï¿½ (ï¿½ï¿½ï¿½)
+    public float a;                // ï¿½ï¿½ (ï¿½ï¿½ï¿?)
     public float p;                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ x)
     public float q;
     public float xDir;
@@ -24,6 +24,9 @@ public class BulletSettings
 
     public float detectionRadius;
     public string textContent;
+
+    public float darkTime;
+    public float targetVisionScale;
 
     public void setCircleSettings(Vector3 ol, Vector3 tl, float s, float r)
     {
@@ -69,8 +72,15 @@ public class BulletSettings
 
     public void setMirrorSettings(float rt, float md)
     {
-        this.reverseTime = rt;
-        this.mirrorDuration = md;
+        reverseTime = rt;
+        mirrorDuration = md;
+    }
+
+    public void setPannobGimmikSettings(float dt, float md, float tv)
+    {
+        darkTime = dt;
+        mirrorDuration = md;
+        targetVisionScale = tv;
     }
 
     public void setVanishSettings(Vector3 ol, Vector3 tl, float s, float r, float dr, string text)

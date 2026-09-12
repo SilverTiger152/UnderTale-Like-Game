@@ -66,5 +66,12 @@ TagManager:
   - name: Player
     uniqueID: 1994115137
     locked: 0
+  - name: PannobMask
+    uniqueID: 4162421193
+    locked: 0
+  - name: HPBar
+    uniqueID: 2105644655
+    locked: 0
   m_RenderingLayers:
   - Default
+  m_MigratedRenderPipelines: []

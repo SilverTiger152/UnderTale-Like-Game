@@ -12,6 +12,7 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] public GameObject QuadraticFunctionPrefab;
     [SerializeField] public GameObject mirrorGimmikPrefab; // 미러 기믹 프리팹 등록용
     [SerializeField] public GameObject vanishBulletPrefab;
+    [SerializeField] public GameObject pannobGimmikPrefab; // 패놉 기믹 프리팹 등록용
 
     [SerializeField] private AudioClip warningSound; // 인스펙터에서 효과음 등록
     [SerializeField] private SoundManager soundManager;
@@ -52,6 +53,14 @@ public class BulletSpawner : MonoBehaviour
         MirrorGimmik mirrorController = mirrorObj.GetComponent<MirrorGimmik>();
         mirrorController.StartMirrorEffect(mirrorGimmikData);
     }
+
+public void CopyPannob(PannobGimmikData pannobGimmikData)
+{
+    // mirrorGimmikPrefab 대신 pannobGimmikPrefab을 소환!
+    GameObject pannobObj = Instantiate(pannobGimmikPrefab); 
+    PannobGimmik pannobController = pannobObj.GetComponent<PannobGimmik>();
+    pannobController.StartPannobEffect(pannobGimmikData);
+}
 
     public IEnumerator CopySquare(SquareBulletData squareBulletData)
     {

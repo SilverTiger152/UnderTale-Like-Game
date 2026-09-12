@@ -15,14 +15,14 @@ public class NPatternFive : MonoBehaviour, IPatternInfo
         StopAllCoroutines();
         spawner.StopAllCoroutines();
 
-        // ¸ðµç °æ°í¼± »èÁ¦
-        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>(FindObjectsSortMode.None);
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        LineRenderer[] warningLines = FindObjectsByType<LineRenderer>();
         foreach (LineRenderer line in warningLines)
         {
             if (line.gameObject != null) Destroy(line.gameObject);
         }
 
-        // ¸ðµç ÃÑ¾Ë »èÁ¦
+        // ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
         {
@@ -40,7 +40,7 @@ public class NPatternFive : MonoBehaviour, IPatternInfo
 
             while (slope < -2f || slope > 2f)
             {
-                slope = Random.Range(-4f, 4f); // 0ÀÌ ³ª¿À¸é ´Ù½Ã »ÌÀ½
+                slope = Random.Range(-4f, 4f); // 0ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
 
             float positionY = (slope < 0f) ? 4f : -4f;
