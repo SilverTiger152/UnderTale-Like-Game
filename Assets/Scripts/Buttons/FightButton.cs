@@ -6,8 +6,8 @@ using static ButtonInformation;
 
 
 /*
- * ½Î¿ì±â ¹öÆ°
- * ¾ÆÁ÷ Àû¿¡°Ô µ¥¹ÌÁö ÁÖ´Â °Å ±¸Çö ¾ÈÇÔ
+ * ï¿½Î¿ï¿½ï¿½ ï¿½ï¿½Æ°
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
  */
 
 public class FightButton : MonoBehaviour, IButton
@@ -22,7 +22,6 @@ public class FightButton : MonoBehaviour, IButton
     }
     public void onClick()
     {
-        // µô ³Ö´Â ÄÚµå
         player.setIsPlayerTurn(false);
     }
     void Update()
